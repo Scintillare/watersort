@@ -22,9 +22,9 @@ class Game:
         self.surface = pygame.display.set_mode((width, height))
         pygame.display.set_caption(caption)
         self.clock = pygame.time.Clock()
-        self.keydown_handlers = defaultdict(list)
         self.keyup_handlers = defaultdict(list)
         self.mouse_handlers = []
+
 
     def update(self):
         for o in self.objects:
@@ -39,9 +39,13 @@ class Game:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type in (pygame.MOUSEBUTTONDOWN, 
-                                pygame.MOUSEBUTTONUP, 
-                                pygame.MOUSEMOTION):
+            elif event.type == pygame.KEYUP:
+                for handler in self.keyup_handlers[event.key]:
+                    handler(event.key)
+            elif event.type == pygame.MOUSEBUTTONUP:
+            # in (pygame.MOUSEBUTTONDOWN, 
+            #                     pygame.MOUSEBUTTONUP, 
+            #                     pygame.MOUSEMOTION):
                 for handler in self.mouse_handlers:
                     handler(event.type, event.pos)
 
@@ -56,5 +60,4 @@ class Game:
 
             pygame.display.update()
             self.clock.tick(self.frame_rate)
-
 
