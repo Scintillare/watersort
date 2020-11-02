@@ -3,7 +3,7 @@ import sys
 
 from collections import defaultdict
 
-
+#  https://habr.com/ru/post/347138/
 class Game:
     def __init__(self, 
                  caption, 

@@ -1,6 +1,6 @@
 from pygame.rect import Rect
 
-
+#  https://habr.com/ru/post/347138/
 class GameObject:
     def __init__(self, x, y, w, h, speed=(0,0)):
         self.bounds = Rect(x, y, w, h)
