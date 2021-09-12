@@ -2,20 +2,21 @@ from bottle import Bottle
 from game import Game
 import pygame
 from math import ceil
+import os
 
 from constants import *
 
 class Level(Game):
     def __init__(self, 
-                 caption, 
-                 width, 
-                 height, 
-                 frame_rate,
+                #  caption, 
+                #  width, 
+                #  height, 
+                #  frame_rate,
                 number, 
                 bottles_number,
                 liquids):
                 
-        Game.__init__(self, caption, width, height, frame_rate)
+        Game.__init__(self, CAPTION, WIDTH, HEIGHT, FRAME_RATE)
         self.number = number
         self.bottles_number = bottles_number
         self.bottles = []
@@ -138,7 +139,10 @@ class Level(Game):
         self.game_over = True
 
     def write_moves(self):
-        with open('moves'+str(self.number)+'.txt', 'w+')as f:
-            for move in self.moves_stack:
-                f.write(str(move)+'\n')
+        moves_dir = './moves/'
+        if not os.path.exists(moves_dir):
+            os.mkdir(moves_dir)
+        with open(moves_dir+str(self.number)+'.txt', 'w+')as f:
+            for bottles, bn in self.moves_stack:
+                f.write(str(bottles[0]+1)+' ' + str(bottles[1]+1)+' ' + str(bn)+'\n')
                 

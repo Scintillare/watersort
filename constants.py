@@ -18,3 +18,9 @@ WINE = (105, 25, 80)
 
 BLC_W, BLC_H = 50, 35
 BTL_COLOR = (205, 205, 205)
+
+
+CAPTION = "Watersort"
+WIDTH = 800
+HEIGHT = 600
+FRAME_RATE = 30
